@@ -22,23 +22,21 @@ def connect_a(hostname, port, username, password, command='ls -l'):
         return stdout.read().decode()[:]
 
 
-
-def trace_log(url):
-    # return subprocess.check_output(['/usr/bin/tracepath', url]).decode()
-    pass
+def trace_b_log(p):
+    return connect_a(
+        hostname=p["linux1"],
+        port=p["port1"],
+        username=p["user1"],
+        password=p["password1"],
+        command='/usr/bin/tracepath ' + p["linux2"]
+    )
 
 
 def main():
     p = load_params()
     # print(p)
-    # print(trace_log(p["linux2"]))
-    connect_a(
-        hostname=p["linux1"], 
-        port=p["port1"], 
-        username=p["user1"], 
-        password=p["password1"],
-        command='/usr/bin/tracepath ' + p["linux2"]
-        )
+    trace_b_log(p)
+    trace_b_log(p)
 
 
 if __name__ == '__main__':
