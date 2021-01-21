@@ -39,13 +39,18 @@ def load_params():
         description='Process testing 2 ways of linux mashins connections'
     )
     parser.add_argument(
+        '-l', '--log_folder', required=False,
+        metavar='log_folder', type=str,
+        help='folder to save log files'
+    )
+    parser.add_argument(
         '-f', '--test_file', required=False,
         metavar='test_file', type=str,
         help='file name for testing connection speed'
     )
     parser.add_argument(
         '-s', '--test_file_size', required=False,
-        metavar='test_file_size', type=float,
+        metavar='test_file_size', type=int,
         help=('file size in Mb, generated ' +
               '(if no test_file) for testing connection speed')
     )
@@ -72,7 +77,7 @@ def load_params():
 
     args = parser.parse_args()
     res["test_file"] = load_param(args, "test_file", str)
-    res["test_file_size"] = load_param(args, "test_file_size", float, 100.)
+    res["test_file_size"] = load_param(args, "test_file_size", int, 100.)
     res["linux1"] = load_param(args, "linux1", str, "Linux-A")
     res["port1"] = load_param(args, "port1", int, 22)
     res["user1"] = load_param(args, "user1", str, "ubuntu")
@@ -81,6 +86,7 @@ def load_params():
     res["port2"] = load_param(args, "port2", int, 22)
     res["user2"] = load_param(args, "user2", str, "ubuntu")
     res["password2"] = load_param(args, "password2", str)
+    res["logs_folder"] = load_param(args, "logs_folder", str, "./")
     return res
 
 

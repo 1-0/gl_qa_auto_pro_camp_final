@@ -5,14 +5,12 @@ Connect to remote device and run shell command
 """
 
 
-# import sys
-# import os
-# from os.path import join, dirname
-# import subprocess
 import paramiko
+import datetime
 
 
 def connect_a(hostname, port, username, password, command='ls -l'):
+
     with paramiko.SSHClient() as client:
         client.load_system_host_keys()
         client.connect(
@@ -22,18 +20,22 @@ def connect_a(hostname, port, username, password, command='ls -l'):
             password=password
         )
         stdin, stdout, stderr = client.exec_command(command)
-        print(stdout.read().decode())
-        return stdout.read().decode()[:]
+        out = stdout.read().decode() + str(stderr.read().decode())
+        print(out)
+        #print(str(stderr.read().decode()))
+    return out
 
 
 def trace_b_log(p):
-    return connect_a(
+    command = '/usr/bin/tracepath ' + p["linux2"]
+    r = connect_a(
         hostname=p["linux1"],
         port=p["port1"],
         username=p["user1"],
         password=p["password1"],
-        command='/usr/bin/tracepath ' + p["linux2"]
+        command=command
     )
+    return " -\n".join([datetime.datetime.now().isoformat(), command, r])
 
 
 def create_dummy_file(p):
@@ -42,8 +44,20 @@ def create_dummy_file(p):
         port=p["port1"],
         username=p["user1"],
         password=p["password1"],
-        command=f"dd if=/dev/urandom of=.dummy.file bs=1M count={p['test_file_size']} ; ls -al .dummy.file"
+        command=f'dd if=/dev/urandom of=.dummy.file bs=1M count={p["test_file_size"]}'
     )
+
+
+def send_dummy_file(p):
+    command = f'time $(sshpass -p {p["password2"]} scp .dummy.file scp://{p["user2"]}@{p["linux2"]}:{p["port2"]})'
+    r = connect_a(
+        hostname=p["linux1"],
+        port=p["port1"],
+        username=p["user1"],
+        password=p["password1"],
+        command=command
+    )
+    return " -\n".join([datetime.datetime.now().isoformat(), command, r])
 
 
 def remove_dummy_file(p):
@@ -63,4 +77,9 @@ if __name__ == '__main__':
     p = load_params()
     trace_b_log(p)
     create_dummy_file(p)
+    send_dummy_file(p)
+    remove_dummy_file(p)
+    trace_b_log(p)
+    create_dummy_file(p)
+    send_dummy_file(p)
     remove_dummy_file(p)
