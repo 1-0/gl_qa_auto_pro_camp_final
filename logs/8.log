@@ -1,0 +1,6 @@
+2021-01-22T12:45:07.113109 -
+time $(sshpass -p 1111111111q scp .dummy.file scp://a10@127.0.0.1:10022) -
+
+real	0m2,308s
+user	0m0,839s
+sys	0m0,360s

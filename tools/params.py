@@ -3,8 +3,22 @@
 """
 The params module load param from:
  - command line args
- - .env file
  - default values
+ - .env file like
+a10@a10-pc:~/proj/gl_qa/src$ cat ./.env
+LOGS_FOLDER=./logs/
+
+TEST_FILE_SIZE=100
+
+LINUX1=2.0.0.1
+PORT1=22
+USER1=a
+PASSWORD1=1
+
+LINUX2=2.0.0.1
+PORT2=22
+USER2=a
+PASSWORD2=1
 """
 
 
@@ -30,7 +44,6 @@ class ParamsHolder:
               "logs_folder":    [str, "./"],
               }
 
-
     def load_param(self, args, param_name, param_type, default=None):
         """load_param - load param
         from args or .env or default"""
@@ -49,7 +62,6 @@ class ParamsHolder:
                     )
             return
         setattr(self, param_name, default)
-
 
     @staticmethod
     def get_parser():
@@ -70,7 +82,7 @@ class ParamsHolder:
         parser.add_argument(
             '-s', '--test_file_size', required=False,
             metavar='test_file_size', type=int,
-            help=('file size in Mb, generated ' +
+            help=('file sized in MiB, generated ' +
                   '(if no test_file) for testing connection speed')
         )
         parser.add_argument(
@@ -95,24 +107,22 @@ class ParamsHolder:
         )
         return parser
 
-
     def __init__(self):
         """__init__ - load params"""
 
         parser = self.get_parser()
         args = parser.parse_args()
         load_dotenv()
-        for k in self.params:
+        for key in self.params:
             self.load_param(
                             args,
-                            k,
-                            self.params[k][0],
-                            self.params[k][1],
+                            key,
+                            self.params[key][0],
+                            self.params[key][1],
                             )
 
 
 if __name__ == '__main__':
     ph = ParamsHolder()
-    print(ph)
     for i in ph.params:
         print([i, getattr(ph, i)])
