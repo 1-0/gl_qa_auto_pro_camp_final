@@ -48,7 +48,8 @@ class ParamsHolder:
               "r2_port":        [int, 22],
               "r2_user":        [str, "cisco"],
               "r2_password":    [str, "cisco"],
-              }
+              "logs_folder":    [str, "./"],
+    }
 
     def load_param(self, args, param_name, param_type, default=None):
         """load_param - load param
