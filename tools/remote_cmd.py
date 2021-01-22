@@ -7,10 +7,10 @@ Connect to remote device and run shell command
 """
 
 
+import logging
 from paramiko import SSHClient
 from datetime import datetime
 from .params import ParamsHolder
-
 
 class CommandsRunner:
 
@@ -58,6 +58,37 @@ class CommandsRunner:
 
     def remove_dummy_file(self):
         return self.connect_a(command=f"rm -v .dummy.file")
+
+    def setup_topology(self):
+        pass
+
+    def restore_topology(self):
+        pass
+
+    def run_sequence(self):
+        res = self.trace_b_log()
+        logging.info(res)
+        with open(f'{self.params.logs_folder}2.log', 'w') as f:
+            f.write(res)
+        self.create_dummy_file()
+        res = self.send_dummy_file()
+        logging.info(res)
+        with open(f'{self.params.logs_folder}4.log', 'w') as f:
+            f.write(res)
+        self.remove_dummy_file()
+        self.setup_topology()
+        res = self.trace_b_log()
+        logging.info(res)
+        with open(f'{self.params.logs_folder}6.log', 'w') as f:
+            f.write(res)
+        self.create_dummy_file()
+        res = self.send_dummy_file()
+        logging.info(res)
+        with open(f'{self.params.logs_folder}8.log', 'w') as f:
+            f.write(res)
+        self.remove_dummy_file()
+        self.restore_topology()
+        # print(res)
 
 
 if __name__ == '__main__':

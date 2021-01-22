@@ -1,26 +1,108 @@
-2021-01-22T12:44:42.537016 -
+[INFO]2021-01-22 14:26:45,395:
+Connected (version 2.0, client OpenSSH_8.2p1)
+[INFO]2021-01-22 14:26:45,433:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:26:45,468:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:26:45,480:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:26:45,514:
+Authentication (password) successful!
+[INFO]2021-01-22 14:26:46,335:
+2021-01-22T14:26:46.335608 -
 /usr/bin/tracepath 127.0.0.1 -
- 1:  localhost                                             0.105ms reached
+ 1:  localhost                                             3.181ms reached
      Resume: pmtu 65535 hops 1 back 1 
 
-
-2021-01-22T12:44:52.642093 -
+[INFO]2021-01-22 14:26:46,372:
+Connected (version 2.0, client OpenSSH_8.2p1)
+[INFO]2021-01-22 14:26:46,433:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:26:46,469:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:26:46,480:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:26:46,498:
+Authentication (password) successful!
+[INFO]2021-01-22 14:26:56,237:
+Connected (version 2.0, client OpenSSH_8.2p1)
+[INFO]2021-01-22 14:26:56,325:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:26:56,360:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:26:56,371:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:26:56,406:
+Authentication (password) successful!
+[INFO]2021-01-22 14:27:06,075:
+2021-01-22T14:27:06.075111 -
 time $(sshpass -p 1111111111q scp .dummy.file scp://a10@127.0.0.1:10022) -
 
-real	0m4,542s
-user	0m0,905s
-sys	0m0,358s
+real	0m2,627s
+user	0m0,912s
+sys	0m0,392s
 
-
-2021-01-22T12:45:00.202667 -
+[INFO]2021-01-22 14:27:06,302:
+Connected (version 2.0, client OpenSSH_8.2p1)
+[INFO]2021-01-22 14:27:06,364:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:06,412:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:06,563:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:06,597:
+Authentication (password) successful!
+[INFO]2021-01-22 14:27:08,983:
+Connected (version 2.0, client OpenSSH_8.2p1)
+[INFO]2021-01-22 14:27:09,029:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:09,097:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:09,107:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:09,141:
+Authentication (password) successful!
+[INFO]2021-01-22 14:27:09,557:
+2021-01-22T14:27:09.557384 -
 /usr/bin/tracepath 127.0.0.1 -
- 1:  localhost                                             0.449ms reached
+ 1:  localhost                                             0.144ms reached
      Resume: pmtu 65535 hops 1 back 1 
 
-
-2021-01-22T12:45:07.113109 -
+[INFO]2021-01-22 14:27:09,583:
+Connected (version 2.0, client OpenSSH_8.2p1)
+[INFO]2021-01-22 14:27:09,648:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:09,685:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:09,696:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:09,729:
+Authentication (password) successful!
+[INFO]2021-01-22 14:27:10,969:
+Connected (version 2.0, client OpenSSH_8.2p1)
+[INFO]2021-01-22 14:27:11,026:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:11,069:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:11,079:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:11,113:
+Authentication (password) successful!
+[INFO]2021-01-22 14:27:14,374:
+2021-01-22T14:27:14.374709 -
 time $(sshpass -p 1111111111q scp .dummy.file scp://a10@127.0.0.1:10022) -
 
-real	0m2,308s
-user	0m0,839s
-sys	0m0,360s
+real	0m2,791s
+user	0m0,842s
+sys	0m0,352s
+
+[INFO]2021-01-22 14:27:14,488:
+Connected (version 2.0, client OpenSSH_8.2p1)
+[INFO]2021-01-22 14:27:14,576:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:14,611:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:14,621:
+Authentication (publickey) failed.
+[INFO]2021-01-22 14:27:14,656:
+Authentication (password) successful!

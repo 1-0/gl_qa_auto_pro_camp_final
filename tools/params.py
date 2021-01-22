@@ -31,7 +31,6 @@ class ParamsHolder:
     """ParamsHolder - class for holding params"""
 
     params = {
-              "test_file":      [str, None],
               "test_file_size": [int, 100],
               "linux1":         [str, "Linux-A"],
               "port1":          [int, 22],
@@ -73,11 +72,6 @@ class ParamsHolder:
             '-l', '--log_folder', required=False,
             metavar='log_folder', type=str,
             help='folder to save log files'
-        )
-        parser.add_argument(
-            '-f', '--test_file', required=False,
-            metavar='test_file', type=str,
-            help='file name for testing connection speed'
         )
         parser.add_argument(
             '-s', '--test_file_size', required=False,
