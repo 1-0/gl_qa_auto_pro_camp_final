@@ -40,7 +40,14 @@ class ParamsHolder:
               "port2":          [int, 22],
               "user2":          [str, "ubuntu"],
               "password2":      [str, ""],
-              "logs_folder":    [str, "./"],
+              "router1":        [str, "ISP1"],
+              "r1_port":        [int, 22],
+              "r1_user":        [str, "cisco"],
+              "r1_password":    [str, "cisco"],
+              "router2":        [str, "ISP"],
+              "r2_port":        [int, 22],
+              "r2_user":        [str, "cisco"],
+              "r2_password":    [str, "cisco"],
               }
 
     def load_param(self, args, param_name, param_type, default=None):
@@ -98,6 +105,26 @@ class ParamsHolder:
             '-p2', '--port2', required=False,
             metavar='port2', type=int,
             help='linux B machine ssh connection port'
+        )
+        parser.add_argument(
+            '-r1', '--router1', required=False,
+            metavar='router1', type=str,
+            help='router 1 machine address'
+        )
+        parser.add_argument(
+            '-r1p', '--r1_port', required=False,
+            metavar='r1_port', type=int,
+            help='router 1 ssh connection port'
+        )
+        parser.add_argument(
+            '-r2', '--router2', required=False,
+            metavar='router2', type=str,
+            help='router 2 machine address'
+        )
+        parser.add_argument(
+            '-r2p', '--r2_port', required=False,
+            metavar='r2_port', type=int,
+            help='router 2 ssh connection port'
         )
         return parser
 

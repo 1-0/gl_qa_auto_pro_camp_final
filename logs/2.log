@@ -1,4 +1,0 @@
-2021-01-22T14:26:46.335608 -
-/usr/bin/tracepath 127.0.0.1 -
- 1:  localhost                                             3.181ms reached
-     Resume: pmtu 65535 hops 1 back 1 

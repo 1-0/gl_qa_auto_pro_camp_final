@@ -7,10 +7,10 @@ Connect to remote device and run shell command
 """
 
 
-import logging
-from paramiko import SSHClient
 from datetime import datetime
+from paramiko import SSHClient
 from .params import ParamsHolder
+
 
 class CommandsRunner:
 
@@ -66,29 +66,27 @@ class CommandsRunner:
         pass
 
     def run_sequence(self):
-        res = self.trace_b_log()
-        logging.info(res)
+        res = [self.trace_b_log(), ]
         with open(f'{self.params.logs_folder}2.log', 'w') as f:
-            f.write(res)
+            f.write(res[-1])
         self.create_dummy_file()
-        res = self.send_dummy_file()
-        logging.info(res)
+        res.append(self.send_dummy_file())
         with open(f'{self.params.logs_folder}4.log', 'w') as f:
-            f.write(res)
+            f.write(res[-1])
         self.remove_dummy_file()
         self.setup_topology()
-        res = self.trace_b_log()
-        logging.info(res)
+        res.append(self.trace_b_log())
         with open(f'{self.params.logs_folder}6.log', 'w') as f:
-            f.write(res)
+            f.write(res[-1])
         self.create_dummy_file()
-        res = self.send_dummy_file()
-        logging.info(res)
+        res.append(self.send_dummy_file())
         with open(f'{self.params.logs_folder}8.log', 'w') as f:
-            f.write(res)
+            f.write(res[-1])
         self.remove_dummy_file()
         self.restore_topology()
         # print(res)
+        with open(f'{self.params.logs_folder}summary.log', 'w') as f:
+            f.write('\n\n'.join(res))
 
 
 if __name__ == '__main__':
