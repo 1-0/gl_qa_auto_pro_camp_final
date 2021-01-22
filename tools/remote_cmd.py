@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 """
 The remote_cmd module:
 
@@ -6,7 +8,7 @@ Connect to remote device and run shell command
 
 
 import paramiko
-import datetime
+from datetime import datetime
 
 
 def connect_a(hostname, port, username, password, command='ls -l'):
@@ -22,50 +24,52 @@ def connect_a(hostname, port, username, password, command='ls -l'):
         stdin, stdout, stderr = client.exec_command(command)
         out = stdout.read().decode() + str(stderr.read().decode())
         print(out)
-        #print(str(stderr.read().decode()))
     return out
 
 
-def trace_b_log(p):
-    command = '/usr/bin/tracepath ' + p["linux2"]
+def trace_b_log(ph):
+    command = '/usr/bin/tracepath ' + ph.linux2
     r = connect_a(
-        hostname=p["linux1"],
-        port=p["port1"],
-        username=p["user1"],
-        password=p["password1"],
+        hostname=ph.linux1,
+        port=ph.port1,
+        username=ph.user1,
+        password=ph.password1,
         command=command
     )
-    return " -\n".join([datetime.datetime.now().isoformat(), command, r])
+    return " -\n".join([datetime.now().isoformat(), command, r])
 
 
-def create_dummy_file(p):
+def create_dummy_file(ph):
+    command = (f"dd if=/dev/urandom of=.dummy.file" +
+               f" bs=1M count={ph.test_file_size}")
     return connect_a(
-        hostname=p["linux1"],
-        port=p["port1"],
-        username=p["user1"],
-        password=p["password1"],
-        command=f'dd if=/dev/urandom of=.dummy.file bs=1M count={p["test_file_size"]}'
-    )
-
-
-def send_dummy_file(p):
-    command = f'time $(sshpass -p {p["password2"]} scp .dummy.file scp://{p["user2"]}@{p["linux2"]}:{p["port2"]})'
-    r = connect_a(
-        hostname=p["linux1"],
-        port=p["port1"],
-        username=p["user1"],
-        password=p["password1"],
+        hostname=ph.linux1,
+        port=ph.port1,
+        username=ph.user1,
+        password=ph.password1,
         command=command
     )
-    return " -\n".join([datetime.datetime.now().isoformat(), command, r])
 
 
-def remove_dummy_file(p):
+def send_dummy_file(ph):
+    command = (f"time $(sshpass -p {ph.password2}" +
+    f" scp .dummy.file scp://{ph.user2}@{ph.linux2}:{ph.port2})")
+    r = connect_a(
+        hostname=ph.linux1,
+        port=ph.port1,
+        username=ph.user1,
+        password=ph.password1,
+        command=command
+    )
+    return " -\n".join([datetime.now().isoformat(), command, r])
+
+
+def remove_dummy_file(ph):
     return connect_a(
-        hostname=p["linux1"],
-        port=p["port1"],
-        username=p["user1"],
-        password=p["password1"],
+        hostname=ph.linux1,
+        port=ph.port1,
+        username=ph.user1,
+        password=ph.password1,
         command=f"rm -v .dummy.file"
     )
 
@@ -73,13 +77,13 @@ def remove_dummy_file(p):
 if __name__ == '__main__':
     # import doctest
     # doctest.testmod(verbose=True)
-    from params import load_params
-    p = load_params()
-    trace_b_log(p)
-    create_dummy_file(p)
-    send_dummy_file(p)
-    remove_dummy_file(p)
-    trace_b_log(p)
-    create_dummy_file(p)
-    send_dummy_file(p)
-    remove_dummy_file(p)
+    from params import ParamsHolder
+    ph = ParamsHolder()
+    trace_b_log(ph)
+    create_dummy_file(ph)
+    send_dummy_file(ph)
+    remove_dummy_file(ph)
+    trace_b_log(ph)
+    create_dummy_file(ph)
+    send_dummy_file(ph)
+    remove_dummy_file(ph)
